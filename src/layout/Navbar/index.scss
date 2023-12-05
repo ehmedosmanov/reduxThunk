@@ -1,0 +1,30 @@
+#navbar {
+  height: 72px;
+  background-color: #2b2a4c;
+  color: #fff;
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+    font-size: 25px;
+  }
+}
+
+.container {
+  padding: 0 120px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+}
