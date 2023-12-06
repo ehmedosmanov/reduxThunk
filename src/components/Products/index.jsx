@@ -1,43 +1,59 @@
-import React, { useEffect } from 'react'
-import './index.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import Product from '../Product'
-import { getAllProduct } from '../../features/product/productSlice'
-import Basket from '../Basket'
+import React, { useEffect } from "react";
+import "./index.scss";
+import { useDispatch, useSelector } from "react-redux";
+import Product from "../Product";
+import { getAllProduct } from "../../features/product/productSlice";
+import Basket from "../Basket";
+import Wishlist from "../Wishlist";
 
 const Products = () => {
-  const { initial, basket, isLoading } = useSelector(state => state.basket)
-  console.log(initial)
-  const dispatch = useDispatch()
+  const initial = useSelector((state) => state.basket.initial);
+  const isLoading = useSelector((state) => state.basket.isLoading);
+  const basket = useSelector((state) => state.basket.basket);
+  const wishlist = useSelector((state) => state.basket.wishlist);
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllProduct())
-  }, [dispatch])
+    dispatch(getAllProduct());
+  }, [dispatch]);
 
   return (
-    <div className='container'>
-      <div className='products'>
+    <div className="container">
+      <div className="products">
         {isLoading ? (
           <p>...loading</p>
+        ) : initial ? (
+          initial.map((item) => <Product {...item} product={item} />)
         ) : (
-          initial.map(item => (
-            <Product key={item.id} {...item} product={item} />
-          ))
+          []
         )}
       </div>
-      <div className='basket'>
+      <div className="basket">
         <h1>Basket:</h1>
-        <div className='products'>
+        <div className="products">
           {isLoading ? (
             <p>...loading</p>
+          ) : basket ? (
+            basket.map((item) => <Basket {...item} count={item.count} />)
           ) : (
-            basket.map(item => (
-              <Basket key={item.id} {...item} count={item.count} />
-            ))
+            []
+          )}
+        </div>
+      </div>
+      <div className="basket">
+        <h1>Wishlit:</h1>
+        <div className="products">
+          {isLoading ? (
+            <p>...loading</p>
+          ) : wishlist ? (
+            wishlist.map((item) => <Wishlist id={item.id} {...item} />)
+          ) : (
+            []
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

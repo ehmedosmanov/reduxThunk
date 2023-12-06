@@ -12,19 +12,14 @@ const AddProduct = () => {
   })
 
   const dispatch = useDispatch()
-  console.log(value)
-  useEffect(() => {
-    dispatch(addProduct(value))
-  }, [dispatch, value])
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    console.log(value)
-    dispatch(addProduct(value))
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addProduct(value));
+  };
 
   return (
-    <div className='add-form' onSubmit={e => handleSubmit(e)}>
+    <div className='add-form' onSubmit={handleSubmit}>
       <form id='form'>
         <div className='input-box'>
           <label htmlFor=''>image:</label>
